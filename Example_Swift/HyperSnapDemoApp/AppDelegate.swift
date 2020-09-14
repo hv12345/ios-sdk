@@ -19,12 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         HyperSnapDemoAppLocalizer.DoTheSwizzling()
         
-        if let appID = Global.shared.appID, let appKey = Global.shared.appKey, let region = Global.shared.region {
-            //SDK Initialization Step
-            HyperSnapSDK.initialize(appId: appID, appKey: appKey, region: region)
-        }
+        //SDK Initialization Step
+        HyperSnapSDKConfig.initialize(appId: Global.shared.appID, appKey: Global.shared.appKey, region: Global.shared.region)
         
-        HyperSnapSDK.setShouldUseSignature(true)
+        HyperSnapSDKConfig.setShouldUseSignature(true)
         
         return true
     }
