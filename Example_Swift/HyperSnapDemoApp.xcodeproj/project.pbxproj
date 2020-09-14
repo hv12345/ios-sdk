@@ -17,7 +17,6 @@
 		044E323E20C843F800AEAB5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 044E323620C843F800AEAB5C /* Assets.xcassets */; };
 		044E323F20C843F800AEAB5C /* SwitchLanguage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 044E323720C843F800AEAB5C /* SwitchLanguage.swift */; };
 		044E324120C8473D00AEAB5C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 044E324320C8473D00AEAB5C /* Localizable.strings */; };
-		BE0FE033817A443DE0306464 /* Pods_HyperSnapDemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 69097BDC2C2310B7AD09AE99 /* Pods_HyperSnapDemoApp.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,7 +43,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE0FE033817A443DE0306464 /* Pods_HyperSnapDemoApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -115,7 +113,7 @@
 				04E1DF152060DEE4002F23FC /* Sources */,
 				04E1DF162060DEE4002F23FC /* Frameworks */,
 				04E1DF172060DEE4002F23FC /* Resources */,
-				35B7E93F239803929A7D1CD6 /* [CP] Embed Pods Frameworks */,
+				C6B10920765D0FA140DAE126 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -177,24 +175,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		35B7E93F239803929A7D1CD6 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-HyperSnapDemoApp/Pods-HyperSnapDemoApp-frameworks.sh",
-				"${PODS_ROOT}/../../HyperSnapSDK.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/HyperSnapSDK.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HyperSnapDemoApp/Pods-HyperSnapDemoApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		BD7C51A505DE7BF39ACB46AE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -215,6 +195,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C6B10920765D0FA140DAE126 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HyperSnapDemoApp/Pods-HyperSnapDemoApp-resources.sh",
+				"${PODS_ROOT}/HyperSnapSDK/HVResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HVResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HyperSnapDemoApp/Pods-HyperSnapDemoApp-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -366,7 +364,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = GTKBMCL9MG;
+				DEVELOPMENT_TEAM = QK7TUJW9VP;
 				INFOPLIST_FILE = HyperSnapDemoApp/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
