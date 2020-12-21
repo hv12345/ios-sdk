@@ -56,24 +56,35 @@ NSString* appKey = @"";
             NSLog(@"Error Received: %@",  error);
         }else{
             NSLog(@"Results: %@", result);
-            NSString *docImageUri = result[@"imageUri"];
-            [self makeOCRAPICall:docImageUri];
         }
         [vcNew dismissViewControllerAnimated:true  completion:nil];
         
     }];
 }
 
-- (void)makeOCRAPICall:(NSString *)imageUri{
-    
-    [HVNetworkHelper makeOCRCallWithEndpoint:@"https://apac-docs.hyperverge.co/v1.1/readNID" documentUri:imageUri parameters:NULL headers:NULL completionHandler:^(HVError* error,NSDictionary<NSString *,id> * _Nonnull result,NSDictionary<NSString *,id> * _Nonnull headers){
-        if(error != nil){
-            NSLog(@"Error Received: %@",  error.getErrorMessage);
-        }else{
-            NSLog(@"Results: %@", result);
-        }
-        
-    }];
-}
+//- (void)makeOCRAPICall:(NSString *)imageUri{
+//
+//    [HVNetworkHelper makeOCRCallWithEndpoint:@"https://apac-docs.hyperverge.co/v1.1/readNID" documentUri:imageUri parameters:NULL headers:NULL completionHandler:^(HVError* error,NSDictionary<NSString *,id> * _Nonnull result,NSDictionary<NSString *,id> * _Nonnull headers){
+//        if(error != nil){
+//            NSLog(@"Error Received: %@",  error.getErrorMessage);
+//        }else{
+//            NSLog(@"Results: %@", result);
+//        }
+//
+//    }];
+//}
+//
+//
+//- (void)makeFacematchAPICall:(NSString *)imageUri{
+//
+//    [HVNetworkHelper makeFaceMatchCallWithEndpoint:@"https://apac-faceid.hyperverge.co/v1/photo/verifyPair" faceUri:imageUri documentUri:imageUri parameters:NULL headers:NULL completionHandler:^(HVError* error,NSDictionary<NSString *,id> * _Nonnull result,NSDictionary<NSString *,id> * _Nonnull headers){
+//        if(error != nil){
+//            NSLog(@"Error Received: %@",  error.getErrorMessage);
+//        }else{
+//            NSLog(@"Results: %@", result);
+//        }
+//
+//    }];
+//}
 
 @end
