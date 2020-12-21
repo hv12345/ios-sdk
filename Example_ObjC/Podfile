@@ -6,7 +6,7 @@ target 'HyperSnapDemoApp_ObjC' do
    use_frameworks!
 
   # Pods for HyperSnapDemoApp_ObjC
-  pod 'HyperSnapSDK', :path => '../'
- # pod 'HyperSnapSDK_Instructions', :path => '../'
+  pod 'HyperSnapSDK'
+ # pod 'HyperSnapSDK_Instructions'
 
 end
