@@ -21,10 +21,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if let appID = Global.shared.appID, let appKey = Global.shared.appKey, let region = Global.shared.region {
             //SDK Initialization Step
-            HyperSnapSDK.initialize(appId: appID, appKey: appKey, region: region)
+            HyperSnapSDKConfig.initialize(appId: appID, appKey: appKey, region: region)
         }
         
-        HyperSnapSDK.setShouldUseSignature(true)
+        HyperSnapSDKConfig.setShouldUseSignature(true)
         
         return true
     }
