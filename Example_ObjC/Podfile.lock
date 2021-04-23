@@ -1,5 +1,5 @@
 PODS:
-  - HyperSnapSDK (2.4.24)
+  - HyperSnapSDK (2.5.3)
 
 DEPENDENCIES:
   - HyperSnapSDK
@@ -9,7 +9,7 @@ SPEC REPOS:
     - HyperSnapSDK
 
 SPEC CHECKSUMS:
-  HyperSnapSDK: 5f9a5255c9281f6f1bd58546eaeb29e68b0312b0
+  HyperSnapSDK: 5853abc4aa836d16da740a6b525ed331625b8212
 
 PODFILE CHECKSUM: 7f23eb4288a0a290773d3f9927268ab24d3a83a0
 

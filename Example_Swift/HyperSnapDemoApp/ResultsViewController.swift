@@ -77,10 +77,10 @@ class ResultsViewController: UIViewController {
             return
         }
         
-        let completionHandler:(_ error: HVError?, _ result: [String: AnyObject]?, _ headers: [String:String]?) -> Void = {error, result, header in
+        let completionHandler:(_ error: HVError?, _ response:HVResponse?) -> Void = {error, result in
             
-            self.ocrResult = result
-            self.ocrHeader = header
+            self.ocrResult = result?.apiResult
+            self.ocrHeader = result?.apiHeaders
             self.ocrError = error
             
             self.shouldMakeOCRCall = false
@@ -90,7 +90,7 @@ class ResultsViewController: UIViewController {
         
         let params = ["dataLogging":"yes"] as [String:AnyObject]
         
-        HVNetworkHelper.makeOCRCall(endpoint: Global.shared.currentDocument.getEndpoint(), documentUri: docImageUri ?? "", parameters: params, headers: headers, completionHandler: completionHandler)
+        HVNetworkHelper.makeOCRAPICall(endpoint: Global.shared.currentDocument.getEndpoint(), documentUri: docImageUri ?? "", parameters: params, headers: headers, completionHandler: completionHandler)
     }
     
     
@@ -99,10 +99,10 @@ class ResultsViewController: UIViewController {
         if !shouldMakeFaceMatchCall {
             return
         }
-        let completionHandler:(_ error: HVError?, _ result: [String: AnyObject]?, _ headers: [String:String]?) -> Void = {error, result, header in
+        let completionHandler:(_ error: HVError?, _ response:HVResponse?) -> Void = {error, result in
             
-            self.faceMatchResult = result
-            self.faceMatchHeader = header
+            self.faceMatchResult = result?.apiResult
+            self.faceMatchHeader = result?.apiHeaders
             self.faceMatchError = error
             
             self.shouldMakeFaceMatchCall = false
@@ -112,7 +112,7 @@ class ResultsViewController: UIViewController {
         let headers = ["referenceId":"test"]
         let params = ["dataLogging":"yes"] as [String:AnyObject]
         
-        HVNetworkHelper.makeFaceMatchCall(endpoint: Global.shared.getFaceMatchEndpoint(), faceUri:faceImageUri ?? "", documentUri: docImageUri ?? "", parameters: params, headers: headers, completionHandler: completionHandler)
+        HVNetworkHelper.makeFaceMatchCall(faceUri:faceImageUri ?? "", documentUri: docImageUri ?? "", parameters: params, headers: headers, completionHandler: completionHandler)
     }
     
     

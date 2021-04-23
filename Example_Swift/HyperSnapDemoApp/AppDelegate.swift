@@ -26,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         HyperSnapSDKConfig.setShouldUseSignature(true)
         
+        HyperSnapSDKConfig.startUserSession()
+        
         return true
     }
 

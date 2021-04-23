@@ -85,62 +85,61 @@ class ViewController: UIViewController {
     func startFaceCapture(_ callingVC: UIViewController) {
         
         let hvFaceConfig = HVFaceConfig()
-        HVCameraButton.setImageTintColor(UIColor(red: 0.85, green: 0.22, blue: 0.19, alpha: 1.0))
-        hvFaceConfig.setShouldShowFullScreenViewController(false)
-        hvFaceConfig.setShouldShowInstructionsPage(true)
-        let headers = ["referenceid":"test"]
+        
         if shouldMakeLivenessCall {
             hvFaceConfig.setLivenessMode(HyperSnapParams.LivenessMode.textureLiveness)
         }else{
             hvFaceConfig.setLivenessMode(HyperSnapParams.LivenessMode.none)
         }
-        hvFaceConfig.setLivenessAPIHeaders(headers)
         
-        let params = ["dataLogging":"yes"] as [String:AnyObject]
-        
-        hvFaceConfig.setLivenessAPIParameters(params)
-        
-        let completionHandler:(_ error: HVError?, _ result: [String: AnyObject]?, _ headers: [String:String]?, _ viewController: UIViewController) -> Void = {error, result, headers, vcNew in
-            
-            if self.shouldMakeLivenessCall {
-                self.livenessResult = result
-                self.livenessHeader = headers
-                self.livenessError = error
-            }
-            
-            if let result = result, let imageUri = result["imageUri"] as? String {
-                self.faceImageUri = imageUri
-            }
-            if self.shouldMakeFaceMatchCall {
-                self.startDocumentCapture(vcNew)
-            }else {
-                self.showResultsPage(vcNew)
-            }
+        hvFaceConfig.setShouldReturnFullImageUri(true)
+
+        let completionHandler:(_ error:HVError?,_ response:HVResponse?, _ viewController:UIViewController)->Void = {error, response, vcNew in
+                if self.shouldMakeLivenessCall {
+                    self.livenessResult = response?.apiResult
+                    self.livenessHeader = response?.apiHeaders
+                    self.livenessError = error
+                }
+                
+            if let response = response, let imageUri = response.imageUri {
+                    self.faceImageUri = imageUri
+                }
+                if self.shouldMakeFaceMatchCall {
+                    self.startDocumentCapture(self)
+                }else {
+                    self.showResultsPage(self)
+                }
+                
         }
-        HVFaceViewController.start(callingVC, hvFaceConfig: hvFaceConfig, completionHandler: completionHandler)
+        HVFaceViewController.start(self, hvFaceConfig: hvFaceConfig, completionHandler: completionHandler)
     }
     
     
     //MARK: Implementation for Document capture by HyperSnapSDK
     func startDocumentCapture(_ presentingVC : UIViewController){
         
+        
         let hvDocConfig = HVDocConfig()
         hvDocConfig.setDocumentType(Global.shared.currentDocument.getDocumentType())
         if Global.shared.currentDocument.getDocumentType() == .other{
             hvDocConfig.setAspectRatio(Global.shared.currentDocument.getAspectRatio())
         }
-        hvDocConfig.setShouldShowReviewPage(true)
-        hvDocConfig.setDocumentType(HyperSnapParams.DocumentType.other)
+        let endpoint = "https://vnm-docs.hyperverge.co/v2/nationalID"
+        hvDocConfig.setOCRAPIDetails(endpoint, documentSide:HVDocConfig.DocumentSide.front, params: nil, headers: nil)
 
-        
-        let completionHandler:(_ error: HVError?, _ result: [String: AnyObject]?, _ viewController: UIViewController) -> Void = {error, result, vcNew in
+        let completionHandler:(_ error:HVError?,_ response:HVResponse?,_ viewController:UIViewController)->Void = {error, response, vcNew in
+
+            if(error != nil){/*Handle error*/
+                //Error Code: error.errorCode, Error Message: error.errorMessage
+              }
+            if let response = response{
+                
+                self.docImageUri = response.imageUri //This is the document image stored in app memory
             
-            if let result = result, let imageUri = result["imageUri"] as? String {
-                self.docImageUri = imageUri
-            }
-            self.showResultsPage(vcNew)
+             }
         }
-        HVDocsViewController.start(presentingVC, hvDocConfig: hvDocConfig, completionHandler: completionHandler)
+
+        HVDocsViewController.start(self, hvDocConfig: hvDocConfig, completionHandler: completionHandler)
     }
     
     
